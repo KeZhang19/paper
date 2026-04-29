@@ -23,13 +23,26 @@ app.js          论文数据、中英文切换、筛选、搜索和详情渲染
 *.pdf           论文 PDF 文件
 ```
 
+## 当前分类
+
+网页左侧固定保留这几个方向：
+
+```txt
+rl
+真机rl
+sim2real
+世界模型
+vla
+```
+
 ## 添加一篇论文
 
-在 `app.js` 的 `papers` 数组里新增一个对象即可。建议同时补充 `zh` 和 `en` 两套内容，这样中英文切换最稳定。
+在 `app.js` 的 `papers` 数组里新增一个对象即可。`categories` 使用固定分类的 id，建议同时补充 `zh` 和 `en` 两套内容，这样中英文切换最稳定。
 
 ```js
 {
   id: "paper-id",
+  categories: ["world-model"],
   pdf: "paper.pdf",
   project: "https://example.com",
   arxiv: "https://arxiv.org/abs/xxxx.xxxxx",
@@ -39,25 +52,31 @@ app.js          论文数据、中英文切换、筛选、搜索和详情渲染
     title: "中文或英文论文标题",
     authors: "作者",
     status: "已整理",
-    categories: ["机器人学习"],
     tags: ["关键词"],
-    summary: "主要内容",
-    method: ["方法点 1", "方法点 2"],
-    takeaways: ["阅读要点 1", "阅读要点 2"],
-    notes: "自己的阅读笔记"
+    mainContent: "主要内容",
+    innovations: ["创新点 1", "创新点 2"],
+    implementation: ["实现方法 1", "实现方法 2"]
   },
   en: {
     title: "Paper title",
     authors: "Authors",
     status: "Summarized",
-    categories: ["Robot Learning"],
     tags: ["Keyword"],
-    summary: "Main idea",
-    method: ["Method point 1", "Method point 2"],
-    takeaways: ["Takeaway 1", "Takeaway 2"],
-    notes: "Personal notes"
+    mainContent: "Main content",
+    innovations: ["Innovation 1", "Innovation 2"],
+    implementation: ["Implementation 1", "Implementation 2"]
   }
 }
+```
+
+分类 id 对应关系：
+
+```txt
+rl              -> rl
+real-robot-rl   -> 真机rl
+sim2real        -> sim2real
+world-model     -> 世界模型
+vla             -> vla
 ```
 
 ## GitHub Pages 设置
