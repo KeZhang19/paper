@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Paper Reading Notes</title>
+    <meta
+      name="description"
+      content="A bilingual paper reading notebook with summaries, categories, links, and personal notes."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand-block">
+        <p class="eyebrow" data-i18n="siteLabel">Paper Reading Notes</p>
+        <h1 data-i18n="siteTitle">论文阅读笔记</h1>
+      </div>
+
+      <div class="header-actions" aria-label="language switcher">
+        <button class="lang-button is-active" type="button" data-lang="zh">中文</button>
+        <button class="lang-button" type="button" data-lang="en">English</button>
+      </div>
+    </header>
+
+    <main class="shell">
+      <aside class="sidebar" aria-label="paper navigation">
+        <label class="search-label" for="paper-search" data-i18n="searchLabel">搜索论文</label>
+        <input id="paper-search" class="search-input" type="search" autocomplete="off" />
+
+        <nav class="category-nav" id="category-nav" aria-label="categories"></nav>
+
+        <section class="quick-stats" aria-label="statistics">
+          <div>
+            <span id="paper-count">0</span>
+            <small data-i18n="papers">篇论文</small>
+          </div>
+          <div>
+            <span id="category-count">0</span>
+            <small data-i18n="topics">个方向</small>
+          </div>
+        </section>
+      </aside>
+
+      <section class="content-area" aria-live="polite">
+        <div class="toolbar">
+          <div>
+            <p class="section-kicker" data-i18n="libraryLabel">Library</p>
+            <h2 id="view-title">全部论文</h2>
+          </div>
+          <p id="result-count" class="result-count"></p>
+        </div>
+
+        <div class="workspace">
+          <section class="paper-list" id="paper-list" aria-label="papers"></section>
+          <article class="paper-detail" id="paper-detail" aria-label="paper detail"></article>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
