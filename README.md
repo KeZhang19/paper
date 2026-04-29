@@ -20,7 +20,8 @@ https://KeZhang19.github.io/paper/
 index.html      页面结构
 styles.css      页面样式
 app.js          论文数据、中英文切换、筛选、搜索和详情渲染
-*.pdf           论文 PDF 文件
+read/*.pdf      网页端可打开的论文 PDF 文件
+unread/         暂不显示在网页端的论文 PDF 文件
 ```
 
 ## 当前分类
@@ -37,13 +38,13 @@ vla
 
 ## 添加一篇论文
 
-在 `app.js` 的 `papers` 数组里新增一个对象即可。`categories` 使用固定分类的 id，建议同时补充 `zh` 和 `en` 两套内容，这样中英文切换最稳定。
+把论文 PDF 放到 `read` 文件夹后，在 `app.js` 的 `papers` 数组里新增一个对象即可。`pdf` 字段使用 `read/paper.pdf`，`categories` 使用固定分类的 id，建议同时补充 `zh` 和 `en` 两套内容，这样中英文切换最稳定。
 
 ```js
 {
   id: "paper-id",
   categories: ["world-model"],
-  pdf: "paper.pdf",
+  pdf: "read/paper.pdf",
   project: "https://example.com",
   arxiv: "https://arxiv.org/abs/xxxx.xxxxx",
   year: "2026",

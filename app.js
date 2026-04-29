@@ -59,7 +59,7 @@ const papers = [
   {
     id: "mimicgen",
     categories: ["sim2real"],
-    pdf: "2310.17596v1.pdf",
+    pdf: "read/2310.17596v1.pdf",
     project: "https://mimicgen.github.io",
     arxiv: "https://arxiv.org/abs/2310.17596",
     year: "2023",
@@ -104,7 +104,7 @@ const papers = [
   {
     id: "dreamzero",
     categories: ["world-model"],
-    pdf: "2602.15922v1.pdf",
+    pdf: "read/2602.15922v1.pdf",
     project: "https://dreamzero0.github.io",
     arxiv: "https://arxiv.org/abs/2602.15922",
     year: "2026",
