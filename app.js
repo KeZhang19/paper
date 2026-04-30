@@ -212,6 +212,57 @@ const papers = [
     },
   },
   {
+    id: "dual-arm-push-grasp",
+    categories: ["rl"],
+    pdf: "read/2412.04052v2.pdf",
+    project: "https://sites.google.com/view/pg4da/home",
+    arxiv: "https://arxiv.org/abs/2412.04052",
+    year: "2025",
+    venue: "IEEE RA-L / arXiv:2412.04052",
+    zh: {
+      title: "Learning Dual-Arm Push and Grasp Synergy in Dense Clutter",
+      authors: "Yongliang Wang, Hamidreza Kasaei",
+      status: "已整理",
+      tags: ["Reinforcement Learning", "Dual-arm Manipulation", "Push-Grasp"],
+      mainContent:
+        "这篇论文研究密集杂乱场景中的目标导向双臂 push-grasp。作者提出一个层次化深度强化学习框架，从 RGB-D 视觉输入中学习何时推、如何双臂协同推、何时执行 6-DoF 抓取，从而在目标物体周围创造可抓取空间。系统在 Isaac Gym 中训练，并在仿真和真实双臂机器人上测试。",
+      innovations: [
+        "把双臂系统作为一个统一学习 agent，学习目标导向的双臂 push-grasp 协同，而不是把 pushing 和 grasping 拆成独立模块。",
+        "相比传统固定长度直线 push，提出自适应 push action generation，可从 learned feature map 采样连通像素点并生成单臂或双臂协调推路径。",
+        "输出 6-DoF grasp candidates，而不是只做 top-down grasp，因此更适合密集杂乱场景中的复杂抓取姿态。",
+        "设计 fuzzy-based reward，根据目标孤立程度、动作有效性和 push/grasp 合适性提供连续反馈，加速 PPO 策略学习。",
+      ],
+      implementation: [
+        "输入由双臂 UR5e 上方 RGB-D 相机转换成 color/depth heightmaps，目标物体在训练环境中被条件化标记。",
+        "Angle-View Network backbone 处理 RGB 图像并预测像素级 gripper orientation heatmap，为 6-DoF grasp 方向提供视觉特征。",
+        "CNN-based RL model 接收 backbone 特征并用 PPO 训练，生成 feature map，再由 grasp decoder 和 push decoder 解码成抓取或推的动作。",
+        "push decoder 根据扩展目标 mask 生成推路径，并在 3D 空间中用 Savitzky-Golay filter 平滑轨迹。",
+        "系统先在 Isaac Gym 的简化训练版本中学习，再在完整双臂系统和真实机器人上测试，不需要额外真实数据或微调。",
+      ],
+    },
+    en: {
+      title: "Learning Dual-Arm Push and Grasp Synergy in Dense Clutter",
+      authors: "Yongliang Wang, Hamidreza Kasaei",
+      status: "Summarized",
+      tags: ["Reinforcement Learning", "Dual-arm Manipulation", "Push-Grasp"],
+      mainContent:
+        "This paper studies target-oriented dual-arm push-grasping in dense clutter. It proposes a hierarchical deep reinforcement learning framework that learns when to push, how to coordinate dual-arm pushes, and when to execute a 6-DoF grasp from RGB-D observations. The goal is to create graspable space around a target object in dense clutter. The system is trained in Isaac Gym and evaluated in simulation and on a real dual-arm robot.",
+      innovations: [
+        "It treats the dual-arm system as one learning agent for target-oriented push-grasp synergy, rather than separating pushing and grasping into independent modules.",
+        "The adaptive push generation samples connected pixels from learned feature maps and produces single-arm or coordinated dual-arm push paths, beyond fixed-length straight pushes.",
+        "The framework outputs 6-DoF grasp candidates instead of top-down grasps, making it more suitable for dense clutter.",
+        "A fuzzy reward function evaluates target isolation, action validity, and push/grasp suitability, providing smoother feedback for PPO learning.",
+      ],
+      implementation: [
+        "An overhead RGB-D camera on a dual-arm UR5e setup is converted into color and depth heightmaps, with target conditioning in the training environment.",
+        "An Angle-View Network backbone processes RGB images and predicts pixel-wise gripper orientation heatmaps for 6-DoF grasp reasoning.",
+        "A CNN-based RL model receives backbone features and is trained with PPO to produce a feature map, decoded by grasp and push motion decoders.",
+        "The push decoder uses an expanded target mask to generate push paths, then smooths the 3D trajectory with a Savitzky-Golay filter.",
+        "Training is done in a simplified Isaac Gym setup, then evaluated in the full dual-arm system and on a real robot without extra real-world data or fine-tuning.",
+      ],
+    },
+  },
+  {
     id: "hora-in-hand-rotation",
     categories: ["rl"],
     pdf: "read/2210.04887v1.pdf",
