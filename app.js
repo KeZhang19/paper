@@ -60,6 +60,57 @@ const categories = [
 
 const papers = [
   {
+    id: "dextrah-rgb",
+    categories: ["sim2real"],
+    pdf: "read/document.pdf",
+    project: "https://dextrah-rgb.github.io/",
+    arxiv: "https://arxiv.org/abs/2412.01791",
+    year: "2025",
+    venue: "arXiv:2412.01791",
+    zh: {
+      title: "DextrAH-RGB: Visuomotor Policies to Grasp Anything with Dexterous Hands",
+      authors: "Ritvik Singh, Arthur Allshire, Ankur Handa, Nathan Ratliff, Karl Van Wyk",
+      status: "已整理",
+      tags: ["Sim-to-Real", "Dexterous Grasping", "RGB Policy"],
+      mainContent:
+        "DextrAH-RGB 研究如何只用 RGB 图像输入训练端到端灵巧臂手抓取策略，并从仿真零样本迁移到真实世界。它先训练带特权状态的 fabric-guided teacher policy，再用高保真 tiled rendering 和在线 DAgger 蒸馏成 RGB-based student policy，实现对新物体、新纹理和不同光照条件的真实灵巧抓取。",
+      innovations: [
+        "展示了复杂、动态、接触丰富的 dexterous grasping 任务中端到端 RGB policy 的 robust sim-to-real transfer。",
+        "相比依赖深度图、点云或物体 pose 的方法，RGB 策略避免了透明/反光物体和深度传感器伪影带来的限制。",
+        "复用 geometric fabric controller，把 RL 动作限制在安全、反应式、适合抓取的 palm pose 与手部 PCA action space 中。",
+        "使用 photorealistic tiled rendering、材质/纹理/光照随机化和 stereo RGB 输入，让纯仿真蒸馏出的视觉策略能泛化到真实场景。",
+      ],
+      implementation: [
+        "第一阶段在 Isaac Lab 中用 PPO 训练 state-based teacher FGP，actor 使用带噪状态，critic 使用完整特权状态和接触/力矩信息。",
+        "teacher action 不是直接关节命令，而是 geometric fabric 的参数化目标，包括 palm 6D pose 和 5D 手指 PCA 子空间。",
+        "第二阶段用 online DAgger 蒸馏 student FGP，student 输入左右 RGB 相机图像和本体状态，监督匹配 teacher action distribution，并辅助预测物体 3D 位置。",
+        "训练中使用 HDRI、材质、纹理、相机和物理参数随机化，并通过 ADR 逐步提高任务和动力学难度。",
+        "真实部署时 student 直接从 RGB 与本体感知输出 fabric action，由 fabric controller 和底层 PD 控制器保证安全、平滑执行。",
+      ],
+    },
+    en: {
+      title: "DextrAH-RGB: Visuomotor Policies to Grasp Anything with Dexterous Hands",
+      authors: "Ritvik Singh, Arthur Allshire, Ankur Handa, Nathan Ratliff, Karl Van Wyk",
+      status: "Summarized",
+      tags: ["Sim-to-Real", "Dexterous Grasping", "RGB Policy"],
+      mainContent:
+        "DextrAH-RGB studies end-to-end dexterous arm-hand grasping from RGB image input with zero-shot transfer from simulation to the real world. It first trains a privileged state-based fabric-guided teacher policy, then distills it into an RGB-based student policy using photorealistic tiled rendering and online DAgger, enabling grasping of novel objects under unseen geometry, texture, and lighting.",
+      innovations: [
+        "It demonstrates robust sim-to-real transfer of an end-to-end RGB policy for complex, dynamic, contact-rich dexterous grasping.",
+        "Compared with depth, point-cloud, or object-pose-based methods, RGB avoids limitations from transparent/reflective objects and depth-sensor artifacts.",
+        "A geometric fabric controller constrains RL actions to a safe, reactive grasping-friendly palm pose and hand PCA action space.",
+        "Photorealistic tiled rendering, material/texture/lighting randomization, and stereo RGB inputs allow a simulation-only distilled visual policy to generalize to real scenes.",
+      ],
+      implementation: [
+        "Stage one trains a state-based teacher FGP in Isaac Lab with PPO; the actor receives noisy state observations, while the critic receives privileged state plus contact and torque information.",
+        "The teacher does not output raw joint commands. It emits parameterized fabric targets, including palm 6D pose and a 5D finger PCA subspace.",
+        "Stage two distills a student FGP with online DAgger. The student receives left/right RGB images and proprioception, matches the teacher action distribution, and also predicts the 3D object position.",
+        "Training randomizes HDRI lighting, materials, textures, cameras, and physics parameters, with ADR gradually increasing task and dynamics difficulty.",
+        "At real deployment, the student maps RGB and proprioception directly to fabric actions, while the fabric controller and low-level PD controller ensure safe and smooth execution.",
+      ],
+    },
+  },
+  {
     id: "resfit-real-robot-rl",
     categories: ["real-robot-rl"],
     pdf: "read/2509.19301v2.pdf",
@@ -1826,7 +1877,7 @@ const state = {
   lang: localStorage.getItem("paper-notes-lang") || "zh",
   category: "all",
   query: "",
-  selectedId: "resfit-real-robot-rl",
+  selectedId: "dextrah-rgb",
 };
 
 const nodes = {
