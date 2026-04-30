@@ -1565,7 +1565,7 @@ const papers = [
   },
   {
     id: "mimicgen",
-    categories: ["sim2real"],
+    categories: ["teleop-bc"],
     pdf: "read/2310.17596v1.pdf",
     project: "https://mimicgen.github.io",
     arxiv: "https://arxiv.org/abs/2310.17596",
