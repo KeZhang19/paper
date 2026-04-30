@@ -59,6 +59,57 @@ const categories = [
 
 const papers = [
   {
+    id: "rma-legged-robots",
+    categories: ["rl"],
+    pdf: "read/2107.04034v1.pdf",
+    project: "https://ashish-kmr.github.io/rma-legged-robots/",
+    arxiv: "https://arxiv.org/abs/2107.04034",
+    year: "2021",
+    venue: "arXiv:2107.04034",
+    zh: {
+      title: "RMA: Rapid Motor Adaptation for Legged Robots",
+      authors: "Ashish Kumar, Zipeng Fu, Deepak Pathak, Jitendra Malik",
+      status: "已整理",
+      tags: ["Reinforcement Learning", "Legged Locomotion", "Online Adaptation"],
+      mainContent:
+        "RMA 研究四足机器人如何在真实世界中快速适应未见过的地形、负载变化、摩擦变化和硬件差异。论文提出 Rapid Motor Adaptation 框架，完全在仿真中训练，不依赖参考轨迹或手写足端轨迹生成器，然后直接部署到 Unitree A1 真机。机器人能够在沙地、泥地、草地、碎石、楼梯、变形地面等复杂场景中实时调整运动策略。",
+      innovations: [
+        "把腿式机器人 sim-to-real 问题转化为在线快速适应：不需要在新环境中先采几分钟数据，也不需要真实世界微调。",
+        "提出 base policy + adaptation module 的结构：base policy 使用特权环境信息训练，adaptation module 在部署时从最近状态/动作历史估计 latent extrinsics。",
+        "adaptation module 的输出不追求真实物理参数精确辨识，而是学习对动作决策有用的低维环境表征，从而绕开部分不可辨识问题。",
+        "使用多样地形生成器和生物能量学启发奖励，在仿真中覆盖质量、摩擦、质心、马达强度、地形高度等变化，提高真实泛化能力。",
+      ],
+      implementation: [
+        "第一阶段在仿真中训练 base policy：输入当前状态、上一时刻动作和由环境因子编码器生成的 extrinsics latent，通过 model-free RL 输出目标关节位置。",
+        "第二阶段冻结 base policy，训练 adaptation module：用 on-policy 仿真数据，从过去约 50 步状态和动作历史监督预测 extrinsics latent。",
+        "部署时没有真实环境参数，adaptation module 以约 10Hz 在线估计 extrinsics，base policy 以约 100Hz 根据最新 extrinsics 输出动作，两者异步运行。",
+        "动作输出是目标关节位置，再由 A1 机器人的 PD controller 转成关节力矩执行。",
+        "训练过程结合地形随机化和动力学参数随机化，覆盖摩擦、质量、质心、马达强度等因素，提升零微调真机迁移表现。",
+      ],
+    },
+    en: {
+      title: "RMA: Rapid Motor Adaptation for Legged Robots",
+      authors: "Ashish Kumar, Zipeng Fu, Deepak Pathak, Jitendra Malik",
+      status: "Summarized",
+      tags: ["Reinforcement Learning", "Legged Locomotion", "Online Adaptation"],
+      mainContent:
+        "RMA studies how quadruped robots can rapidly adapt to unseen terrains, payload changes, friction changes, and hardware mismatch in the real world. The paper proposes Rapid Motor Adaptation, trained entirely in simulation without reference trajectories or hand-designed foot trajectory generators, and directly deployed on a Unitree A1 robot. The robot adapts online across sand, mud, grass, pebbles, stairs, deformable surfaces, and other challenging environments.",
+      innovations: [
+        "It frames legged sim-to-real transfer as rapid online adaptation, avoiding minutes of real-world data collection or real-world fine-tuning in each new environment.",
+        "The architecture combines a base policy trained with privileged environment information and an adaptation module that estimates latent extrinsics from recent state-action history at deployment.",
+        "The adaptation module does not need exact physical system identification; it learns a low-dimensional environment representation that is useful for choosing actions.",
+        "A diverse terrain generator and bioenergetics-inspired rewards expose the policy to variations in mass, friction, center of mass, motor strength, and terrain height during simulation training.",
+      ],
+      implementation: [
+        "Phase one trains the base policy in simulation with model-free RL. It receives the current state, previous action, and an extrinsics latent produced by an environment factor encoder, then outputs desired joint positions.",
+        "Phase two freezes the base policy and trains the adaptation module with on-policy simulation data to predict the extrinsics latent from roughly 50 steps of recent state-action history.",
+        "At deployment, no privileged environment parameters are available. The adaptation module runs around 10Hz, while the base policy runs around 100Hz using the latest predicted extrinsics.",
+        "The policy outputs desired joint positions, which are converted to torques by the A1 robot's PD controller.",
+        "Training combines terrain randomization and dynamics randomization over friction, mass, center of mass, motor strength, and related factors for zero-finetuning real-world transfer.",
+      ],
+    },
+  },
+  {
     id: "mimicgen",
     categories: ["sim2real"],
     pdf: "read/2310.17596v1.pdf",
