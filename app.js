@@ -110,6 +110,57 @@ const papers = [
     },
   },
   {
+    id: "hora-in-hand-rotation",
+    categories: ["rl"],
+    pdf: "read/2210.04887v1.pdf",
+    project: "https://haozhi.io/hora/",
+    arxiv: "https://arxiv.org/abs/2210.04887",
+    year: "2022",
+    venue: "CoRL 2022 / arXiv:2210.04887",
+    zh: {
+      title: "In-Hand Object Rotation via Rapid Motor Adaptation",
+      authors: "Haozhi Qi, Ashish Kumar, Roberto Calandra, Yi Ma, Jitendra Malik",
+      status: "已整理",
+      tags: ["Reinforcement Learning", "In-Hand Manipulation", "Rapid Adaptation"],
+      mainContent:
+        "这篇论文把 RMA 的快速在线适应思想迁移到灵巧手手内物体旋转任务。方法只在仿真中用圆柱体训练控制器，然后无需真实世界微调，直接部署到 Allegro Hand 上，依靠本体感知历史适应不同物体的大小、质量、形状和软硬程度，实现多种真实物体绕 z 轴旋转。",
+      innovations: [
+        "把快速运动适应从腿式机器人扩展到手内灵巧操作，证明仅用 proprioception 也能完成对不同物体属性的在线适应。",
+        "训练只使用简单圆柱体，但真实测试覆盖 30+ 个不同形状、尺寸、质量和材质的物体，展示了强 sim-to-real 泛化。",
+        "学习到的 extrinsics latent 与物体质量和尺度等因素有可解释相关性，不要求显式精确辨识真实物理参数。",
+        "RL 训练过程中自然涌现稳定 finger gait，不依赖预定义手指步态、视觉或触觉传感器。",
+      ],
+      implementation: [
+        "第一阶段在仿真中联合训练 object property encoder 和 base policy：object properties 包括位置、尺度、质量、质心和摩擦系数，经 encoder 压缩成 8 维 extrinsics。",
+        "base policy 输入当前关节位置、上一时刻动作和 extrinsics，使用 PPO 训练，输出 Allegro Hand 的目标关节位置。",
+        "第二阶段冻结 base policy，用监督学习训练 adaptation module，从最近的关节位置和动作历史估计 extrinsics。",
+        "真实部署时没有 object properties，adaptation module 在线更新 extrinsics，base policy 以约 20Hz 输出动作，完全依赖 proprioception。",
+        "仿真中随机化圆柱体尺寸、质量、质心、摩擦等参数，并通过旋转奖励、姿态正则、力矩惩罚和物体稳定项塑造可迁移控制策略。",
+      ],
+    },
+    en: {
+      title: "In-Hand Object Rotation via Rapid Motor Adaptation",
+      authors: "Haozhi Qi, Ashish Kumar, Roberto Calandra, Yi Ma, Jitendra Malik",
+      status: "Summarized",
+      tags: ["Reinforcement Learning", "In-Hand Manipulation", "Rapid Adaptation"],
+      mainContent:
+        "This paper transfers the Rapid Motor Adaptation idea to dexterous in-hand object rotation. The controller is trained only in simulation on cylindrical objects, then directly deployed on an Allegro Hand without real-world fine-tuning. Using proprioceptive history, it adapts to object size, mass, shape, and softness and rotates diverse real objects around the z-axis.",
+      innovations: [
+        "It extends rapid motor adaptation from legged locomotion to dexterous in-hand manipulation, showing that proprioception alone can support online adaptation to object properties.",
+        "The policy is trained only on simple cylinders but tested on 30+ real objects with different shapes, sizes, masses, and materials, showing strong sim-to-real generalization.",
+        "The learned extrinsics latent correlates with interpretable object factors such as mass and scale without requiring exact physical system identification.",
+        "Stable finger gaits emerge from RL training without predefined finger-gait controllers, vision, or tactile sensing.",
+      ],
+      implementation: [
+        "Phase one jointly trains an object property encoder and base policy in simulation. Object position, scale, mass, center of mass, and friction are compressed into an 8D extrinsics latent.",
+        "The base policy takes current joint positions, previous action, and extrinsics as input, is trained with PPO, and outputs target Allegro Hand joint positions.",
+        "Phase two freezes the base policy and trains an adaptation module with supervised learning to estimate extrinsics from recent joint-position and action history.",
+        "During real deployment, object properties are unavailable. The adaptation module updates extrinsics online, while the base policy outputs actions at about 20Hz using only proprioception.",
+        "Simulation randomizes cylinder size, mass, center of mass, and friction, with rewards for rotation plus pose regularization, torque penalties, and object stability.",
+      ],
+    },
+  },
+  {
     id: "bidexhands",
     categories: ["rl"],
     pdf: "read/2206.08686v2.pdf",
