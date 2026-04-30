@@ -32,6 +32,7 @@ unread/         暂不显示在网页端的论文 PDF 文件
 rl
 真机rl
 sim2real
+仿真向实机的动力学辨识
 世界模型
 vla
 ```
@@ -76,6 +77,7 @@ vla
 rl              -> rl
 real-robot-rl   -> 真机rl
 sim2real        -> sim2real
+sim2real-dynamics-id -> 仿真向实机的动力学辨识
 world-model     -> 世界模型
 vla             -> vla
 ```
