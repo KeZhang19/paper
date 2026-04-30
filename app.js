@@ -52,6 +52,7 @@ const categories = [
   { id: "real-robot-rl", label: { zh: "真机rl", en: "Real-robot RL" } },
   { id: "sim2real", label: { zh: "sim2real", en: "sim2real" } },
   { id: "sim2real-dynamics-id", label: { zh: "仿真向实机的动力学辨识", en: "Sim-to-real Dynamics Identification" } },
+  { id: "teleop-bc", label: { zh: "遥操BC", en: "Teleoperation BC" } },
   { id: "world-model", label: { zh: "世界模型", en: "World Model" } },
   { id: "vla", label: { zh: "vla", en: "VLA" } },
 ];

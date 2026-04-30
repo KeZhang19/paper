@@ -33,6 +33,7 @@ rl
 真机rl
 sim2real
 仿真向实机的动力学辨识
+遥操BC
 世界模型
 vla
 ```
@@ -78,6 +79,7 @@ rl              -> rl
 real-robot-rl   -> 真机rl
 sim2real        -> sim2real
 sim2real-dynamics-id -> 仿真向实机的动力学辨识
+teleop-bc       -> 遥操BC
 world-model     -> 世界模型
 vla             -> vla
 ```
