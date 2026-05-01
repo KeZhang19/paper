@@ -36,7 +36,6 @@ sim2real
 遥操BC
 世界模型
 vla
-vla框架
 ```
 
 ## 添加一篇论文
@@ -83,7 +82,6 @@ sim2real-dynamics-id -> 仿真向实机的动力学辨识
 teleop-bc       -> 遥操BC
 world-model     -> 世界模型
 vla             -> vla
-vla-framework   -> vla框架
 ```
 
 ## GitHub Pages 设置

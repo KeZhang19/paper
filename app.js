@@ -56,7 +56,6 @@ const categories = [
   { id: "bc-rl", label: { zh: "BC+RL", en: "BC+RL" } },
   { id: "world-model", label: { zh: "世界模型", en: "World Model" } },
   { id: "vla", label: { zh: "vla", en: "VLA" } },
-  { id: "vla-framework", label: { zh: "vla框架", en: "VLA Framework" } },
 ];
 
 const papers = [
@@ -211,7 +210,7 @@ const papers = [
   },
   {
     id: "vitra-human-video-vla",
-    categories: ["vla-framework"],
+    categories: ["vla"],
     pdf: "https://arxiv.org/pdf/2510.21571",
     project: "https://microsoft.github.io/VITRA/",
     arxiv: "https://arxiv.org/abs/2510.21571",
@@ -260,7 +259,7 @@ const papers = [
   },
   {
     id: "groot-n1",
-    categories: ["vla-framework"],
+    categories: ["vla"],
     pdf: "https://arxiv.org/pdf/2503.14734",
     project: "https://developer.nvidia.com/isaac/gr00t",
     arxiv: "https://arxiv.org/abs/2503.14734",
@@ -1405,7 +1404,7 @@ const papers = [
   },
   {
     id: "hawor",
-    categories: ["vla-framework"],
+    categories: ["vla"],
     pdf: "https://arxiv.org/pdf/2501.02973",
     project: "https://hawor-project.github.io/",
     arxiv: "https://arxiv.org/abs/2501.02973",
