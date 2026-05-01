@@ -1306,6 +1306,55 @@ const papers = [
     },
   },
   {
+    id: "hawor",
+    categories: ["vla-framework"],
+    pdf: "https://arxiv.org/pdf/2501.02973",
+    project: "https://hawor-project.github.io/",
+    arxiv: "https://arxiv.org/abs/2501.02973",
+    year: "2025",
+    venue: "arXiv:2501.02973",
+    zh: {
+      title: "HaWoR: World-Space Hand Motion Reconstruction from Egocentric Videos",
+      authors: "Jinglei Zhang, Jiankang Deng, Chao Ma, Rolandos Alexandros Potamias",
+      status: "已整理",
+      tags: ["Egocentric Video", "Hand Motion Reconstruction", "Teleoperation Data"],
+      mainContent:
+        "HaWoR 研究如何从第一视角视频中恢复世界坐标系下的人手运动轨迹。它针对 egocentric video 中相机和手都在持续运动的问题，把任务拆成相机坐标系手部重建与世界坐标系相机轨迹估计，从而得到可用于机器人遥操作、示范学习和人手动作分析的稳定 3D 手部运动。",
+      innovations: [
+        "从传统单帧、相机坐标系 3D hand pose estimation 扩展到世界坐标系 hand motion reconstruction，更适合第一视角视频数据。",
+        "把手部运动重建和相机轨迹估计解耦，降低 egocentric camera motion 对手部轨迹的干扰。",
+        "提出 adaptive egocentric SLAM framework，在剧烈相机运动和手部遮挡场景下提升世界坐标系轨迹估计鲁棒性。",
+        "设计 motion infiller network，在手移出视野或缺帧时补全手部运动序列，得到更连续的动作轨迹。",
+      ],
+      implementation: [
+        "先在 camera space 中重建逐帧手部姿态和运动，再估计相机在 world coordinate system 中的轨迹。",
+        "用 adaptive egocentric SLAM 处理第一视角视频中快速运动、动态遮挡和传统 SLAM 容易失效的问题。",
+        "对手部不可见或超出视锥的帧使用 motion infiller network 进行时序补全。",
+        "最终把 camera-space hand motion 与 world-space camera trajectory 组合，输出世界坐标系下连续的人手运动轨迹。",
+      ],
+    },
+    en: {
+      title: "HaWoR: World-Space Hand Motion Reconstruction from Egocentric Videos",
+      authors: "Jinglei Zhang, Jiankang Deng, Chao Ma, Rolandos Alexandros Potamias",
+      status: "Summarized",
+      tags: ["Egocentric Video", "Hand Motion Reconstruction", "Teleoperation Data"],
+      mainContent:
+        "HaWoR studies how to recover world-space hand motion trajectories from egocentric videos. Because both the camera and hands move continuously, it decouples the problem into camera-space hand reconstruction and world-space camera trajectory estimation, producing stable 3D hand motion useful for teleoperation data, imitation learning, and human-hand action analysis.",
+      innovations: [
+        "It moves beyond single-frame camera-space 3D hand pose estimation toward world-space hand motion reconstruction for egocentric video.",
+        "Hand motion reconstruction and camera trajectory estimation are decoupled, reducing interference from egocentric camera motion.",
+        "An adaptive egocentric SLAM framework improves world-frame camera trajectory estimation under challenging camera dynamics.",
+        "A motion infiller network completes hand motion when hands leave the view frustum or frames are missing, yielding more continuous trajectories.",
+      ],
+      implementation: [
+        "The method first reconstructs framewise hand pose and motion in camera space, then estimates the camera trajectory in the world coordinate system.",
+        "Adaptive egocentric SLAM handles fast motion, dynamic occlusion, and failure cases of conventional SLAM in first-person videos.",
+        "A motion infiller network fills temporal gaps when hands become invisible or move outside the camera frustum.",
+        "Camera-space hand motion and world-space camera trajectory are combined to output continuous hand trajectories in world coordinates.",
+      ],
+    },
+  },
+  {
     id: "rma-legged-robots",
     categories: ["rl"],
     pdf: "read/2107.04034v1.pdf",
