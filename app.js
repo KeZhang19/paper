@@ -56,6 +56,7 @@ const categories = [
   { id: "bc-rl", label: { zh: "BC+RL", en: "BC+RL" } },
   { id: "world-model", label: { zh: "世界模型", en: "World Model" } },
   { id: "vla", label: { zh: "vla", en: "VLA" } },
+  { id: "vla-framework", label: { zh: "vla框架", en: "VLA Framework" } },
 ];
 
 const papers = [
@@ -205,6 +206,55 @@ const papers = [
         "Real data collection does not require task success; randomized loads are applied to the hand while proprioceptive responses are recorded.",
         "The joint-wise dynamics model learns real dynamics from each joint's history, avoiding heavily occluded object-state estimation.",
         "A residual policy is trained from the learned dynamics to correct base policy actions for real hardware deployment.",
+      ],
+    },
+  },
+  {
+    id: "vitra-human-video-vla",
+    categories: ["vla-framework"],
+    pdf: "https://arxiv.org/pdf/2510.21571",
+    project: "https://microsoft.github.io/VITRA/",
+    arxiv: "https://arxiv.org/abs/2510.21571",
+    year: "2025",
+    venue: "ICRA 2026 / arXiv:2510.21571",
+    zh: {
+      title: "Scalable Vision-Language-Action Model Pretraining for Robotic Manipulation with Real-Life Human Activity Videos",
+      authors: "Qixiu Li, Yu Deng, Yaobo Liang, Lin Luo, Lei Zhou, Chengtang Yao, Lingqi Zeng, Zhiyuan Feng, Huizhi Liang, Sicheng Xu, Yizhong Zhang, Xi Chen, Hao Chen, Lily Sun, Dong Chen, Jiaolong Yang, Baining Guo",
+      status: "已整理",
+      tags: ["VLA", "Human Activity Videos", "Dexterous Manipulation"],
+      mainContent:
+        "VITRA 研究如何用大规模真实人类第一视角手部活动视频预训练机器人操作 VLA。方法把人手看作灵巧机器人末端执行器，自动把无标注、非脚本化的人类视频转成与机器人 VLA 数据对齐的任务片段、语言描述、逐帧 3D 手部动作和相机运动，构建 1M+ episode 级别的 hand-VLA 数据用于预训练。",
+      innovations: [
+        "把 in-the-wild 人类手部视频转成 VLA 训练数据，显著扩大机器人数据中的物体、任务和真实环境覆盖。",
+        "提出自动化 holistic human activity analysis pipeline，可生成 atomic-level 活动片段、语言标签、3D 手部轨迹和相机运动。",
+        "将人手动作空间作为机器人手动作空间的上位表示，使预训练模型能通过少量真实机器人数据适配到灵巧操作。",
+        "展示预训练数据规模带来的 scaling behavior，并在 unseen 真实观测和少量机器人 fine-tuning 场景中提升泛化。",
+      ],
+      implementation: [
+        "从 egocentric human activity videos 中自动分割原子级操作 episode，并为每段生成对应语言指令。",
+        "对视频逐帧恢复 3D hand motion 与 camera motion，将人手轨迹组织成类似机器人 VLA 的 observation-action 数据。",
+        "用生成的 hand-VLA 数据预训练 dexterous hand VLA model，再用少量真实机器人 action data fine-tune。",
+        "真实机器人部署时将机器人动作空间与人手动作空间对齐，用模型执行 pick-and-place、functional grasping 和顺序任务。",
+      ],
+    },
+    en: {
+      title: "Scalable Vision-Language-Action Model Pretraining for Robotic Manipulation with Real-Life Human Activity Videos",
+      authors: "Qixiu Li, Yu Deng, Yaobo Liang, Lin Luo, Lei Zhou, Chengtang Yao, Lingqi Zeng, Zhiyuan Feng, Huizhi Liang, Sicheng Xu, Yizhong Zhang, Xi Chen, Hao Chen, Lily Sun, Dong Chen, Jiaolong Yang, Baining Guo",
+      status: "Summarized",
+      tags: ["VLA", "Human Activity Videos", "Dexterous Manipulation"],
+      mainContent:
+        "VITRA studies how to pretrain robotic manipulation VLA models from large-scale real-life egocentric videos of human hand activities. It treats human hands as dexterous robot end-effectors and automatically converts unannotated, unscripted videos into robot-VLA-aligned task segments, language descriptions, framewise 3D hand motions, and camera motion, forming a 1M+ episode hand-VLA dataset.",
+      innovations: [
+        "It turns in-the-wild human hand videos into VLA training data, greatly expanding object, task, and real-environment coverage beyond existing robot datasets.",
+        "A fully automated holistic human activity analysis pipeline generates atomic activity segments, language labels, 3D hand trajectories, and camera motion.",
+        "The human hand action space is used as a superset for robot hand actions, enabling the pretrained model to adapt with a small amount of real robot data.",
+        "The paper shows scaling behavior from larger pretraining data and stronger generalization on unseen real observations and robot fine-tuning tasks.",
+      ],
+      implementation: [
+        "Egocentric human activity videos are automatically segmented into atomic manipulation episodes with matching language instructions.",
+        "Framewise 3D hand motion and camera motion are reconstructed and formatted as robot-VLA-like observation-action data.",
+        "A dexterous hand VLA model is pretrained on the generated hand-VLA data, then fine-tuned with a small real robot action dataset.",
+        "For deployment, the robot action space is aligned with the human hand action space to perform pick-and-place, functional grasping, and sequential tasks.",
       ],
     },
   },
