@@ -33,7 +33,9 @@ rl
 真机rl
 sim2real
 仿真向实机的动力学辨识
+触觉仿真
 遥操BC
+BC+RL
 世界模型
 vla
 ```
@@ -79,7 +81,9 @@ rl              -> rl
 real-robot-rl   -> 真机rl
 sim2real        -> sim2real
 sim2real-dynamics-id -> 仿真向实机的动力学辨识
+tactile-simulation -> 触觉仿真
 teleop-bc       -> 遥操BC
+bc-rl           -> BC+RL
 world-model     -> 世界模型
 vla             -> vla
 ```
